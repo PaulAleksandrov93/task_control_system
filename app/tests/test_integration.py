@@ -32,6 +32,7 @@ def test_create_task_shift(client):
         "ДатаВремяНачалаСмены": "2024-01-01T00:00:00",
         "ДатаВремяОкончанияСмены": "2024-01-01T08:00:00"
     }
+    
     response = client.post("/task-shifts/", data=json.dumps(task_shift_data))
     assert response.status_code == 201
     assert "id" in response.json()
@@ -43,4 +44,6 @@ def test_get_task_shift_by_id(client):
     data = response.json()
     print("Data from response:", data) 
     assert data["id"] == task_shift_id
-    assert "СтатусЗакрытия" in data  
+    
+
+

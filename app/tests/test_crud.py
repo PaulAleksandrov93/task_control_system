@@ -40,8 +40,5 @@ def test_create_task_shift(db: Session):
         # Проверяем, что closed_at не установлено, если статус задания False
         assert task_shift.closed_at is None
     except Exception as e:
-        # Выводим информацию о возникших ошибках валидации
-        print("Validation errors occurred:")
-        print(e.errors())
         # Повторно поднимаем исключение для передачи его тестовому фреймворку
         raise e

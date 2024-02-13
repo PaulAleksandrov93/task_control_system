@@ -1,0 +1,27 @@
+task_control_system/
+│
+├── app/
+│   ├── __init__.py
+│   ├── crud.py
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   ├── schemas.py
+│   └── tests/
+│       ├── __init__.py
+│       └── test_main.py
+│
+├── alembic/
+│   ├── versions/
+│   │   └── <migration_files>.py
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── alembic.ini
+│
+├── venv/
+│
+├── .env
+├── .gitignore
+├── README.md
+└── requirements.txt

@@ -60,6 +60,7 @@ from app import crud, models, schemas
 from app.database import get_db, engine
 from app.schemas import TaskShift
 
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -74,16 +75,26 @@ def read_task_shifts(skip: int = 0, limit: int = 10, db: Session = Depends(get_d
     task_shifts = crud.get_task_shifts(db=db, skip=skip, limit=limit)
     return task_shifts
 
-@app.get("/task-shifts/{task_shift_id}", response_model=TaskShift)
+# @app.get("/task-shifts/{task_shift_id}", response_model=schemas.TaskShift)
+# def read_task_shift(task_shift_id: int, db: Session = Depends(get_db)):
+#     db_task_shift = crud.get_task_shift(db=db, task_shift_id=task_shift_id)
+#     if db_task_shift is None:
+#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task shift not found")
+    
+#     return schemas.TaskShift(**db_task_shift.__dict__)
+
+@app.get("/task-shifts/{task_shift_id}", response_model=schemas.TaskShiftDB)
 def read_task_shift(task_shift_id: int, db: Session = Depends(get_db)):
     db_task_shift = crud.get_task_shift(db=db, task_shift_id=task_shift_id)
     if db_task_shift is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task shift not found")
     
-    
-    return TaskShift(**db_task_shift.__dict__)
+    # Сериализуем дату в строку
+    db_task_shift.batch_date = db_task_shift.batch_date.isoformat()
 
-@app.put("/task-shifts/{task_shift_id}", response_model=schemas.TaskShift)
+    return db_task_shift
+
+@app.put("/task-shifts/{task_shift_id}", response_model=schemas.TaskShiftUpdate)
 def update_task_shift(task_shift_id: int, task_shift: schemas.TaskShiftUpdate, db: Session = Depends(get_db)):
     updated_task_shift = crud.update_task_shift(db=db, task_shift_id=task_shift_id, task_shift=task_shift)
     return updated_task_shift

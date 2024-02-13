@@ -101,7 +101,21 @@ class TaskShiftBase(BaseModel):
     end_time: datetime = Field(alias="ДатаВремяОкончанияСмены")
     closed_at: Optional[datetime] = None
 
-    
+    class Config:
+        fields = {
+            "СтатусЗакрытия": "status",
+            "ПредставлениеЗаданияНаСмену": "task_description",
+            "РабочийЦентр": "work_center",
+            "Смена": "shift",
+            "Бригада": "brigade",
+            "НомерПартии": "batch_number",
+            "ДатаПартии": "batch_date",
+            "Номенклатура": "product_name",
+            "КодЕКН": "ecn_code",
+            "ИдентификаторРЦ": "rc_identifier",
+            "ДатаВремяНачалаСмены": "start_time",
+            "ДатаВремяОкончанияСмены": "end_time"
+        }
 class TaskShiftCreate(TaskShiftBase):
     СтатусЗакрытия: bool
     ПредставлениеЗаданияНаСмену: str
@@ -131,20 +145,51 @@ class TaskShiftCreate(TaskShiftBase):
             "ДатаВремяНачалаСмены": "start_time",
             "ДатаВремяОкончанияСмены": "end_time"
         }
+    
 
 class TaskShiftUpdate(BaseModel):
-    status: Optional[bool] = None
-    task_description: Optional[str] = Field(alias="ПредставлениеЗаданияНаСмену")
-    work_center: Optional[str] = Field(alias="РабочийЦентр")
-    shift: Optional[str] = Field(alias="Смена")
-    brigade: Optional[str] = Field(alias="Бригада")
-    batch_number: Optional[int] = Field(alias="НомерПартии")
-    batch_date: Optional[date] = Field(alias="ДатаПартии")
-    product_name: Optional[str] = Field(alias="Номенклатура")
-    ecn_code: Optional[str] = Field(alias="КодЕКН")
-    rc_identifier: Optional[str] = Field(alias="ИдентификаторРЦ")
-    start_time: Optional[datetime] = Field(alias="ДатаВремяНачалаСмены")
-    end_time: Optional[datetime] = Field(alias="ДатаВремяОкончанияСмены")
+    # status: Optional[bool] = Field(alias="СтатусЗакрытия")
+    # task_description: Optional[str] = Field(alias="ПредставлениеЗаданияНаСмену")
+    # work_center: Optional[str] = Field(alias="РабочийЦентр")
+    # shift: Optional[str] = Field(alias="Смена")
+    # brigade: Optional[str] = Field(alias="Бригада")
+    # batch_number: Optional[int] = Field(alias="НомерПартии")
+    # batch_date: Optional[date] = Field(alias="ДатаПартии")
+    # product_name: Optional[str] = Field(alias="Номенклатура")
+    # ecn_code: Optional[str] = Field(alias="КодЕКН")
+    # rc_identifier: Optional[str] = Field(alias="ИдентификаторРЦ")
+    # start_time: Optional[datetime] = Field(alias="ДатаВремяНачалаСмены")
+    # end_time: Optional[datetime] = Field(alias="ДатаВремяОкончанияСмены")
+    
+    status: Optional[bool]
+    task_description: Optional[str]
+    work_center: Optional[str]
+    shift: Optional[str]
+    brigade: Optional[str]
+    batch_number: Optional[int]
+    batch_date: Optional[date]
+    product_name: Optional[str]
+    ecn_code: Optional[str]
+    rc_identifier: Optional[str]
+    start_time: Optional[datetime]
+    end_time: Optional[datetime]
+    closed_at: Optional[datetime]
+    
+    class Config:
+        fields = {
+            "СтатусЗакрытия": "status",
+            "ПредставлениеЗаданияНаСмену": "task_description",
+            "РабочийЦентр": "work_center",
+            "Смена": "shift",
+            "Бригада": "brigade",
+            "НомерПартии": "batch_number",
+            "ДатаПартии": "batch_date",
+            "Номенклатура": "product_name",
+            "КодЕКН": "ecn_code",
+            "ИдентификаторРЦ": "rc_identifier",
+            "ДатаВремяНачалаСмены": "start_time",
+            "ДатаВремяОкончанияСмены": "end_time"
+        }
     
 
 class TaskShiftInDBBase(TaskShiftBase):
@@ -153,6 +198,7 @@ class TaskShiftInDBBase(TaskShiftBase):
 
     class Config:
         orm_mode = True
+        
 
 class TaskShift(TaskShiftInDBBase):
     pass
@@ -184,3 +230,24 @@ class Product(BaseModel):
     
 class ProductCreate(BaseModel):
     pass
+
+
+class TaskShiftDB(BaseModel):
+    id: int
+    status: bool
+    task_description: str
+    work_center: str
+    shift: str
+    brigade: str
+    batch_number: int
+    batch_date: date
+    product_name: str
+    ecn_code: str
+    rc_identifier: str
+    start_time: datetime
+    end_time: datetime
+    closed_at: Optional[datetime]
+
+    class Config:
+        orm_mode = True
+
