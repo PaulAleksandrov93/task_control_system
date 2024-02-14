@@ -1,4 +1,4 @@
-#models.py
+# models.py
 
 from sqlalchemy import (
     Column,
@@ -45,7 +45,4 @@ class Product(Base):
     is_aggregated = Column(Boolean, default=False)
     aggregated_at = Column(DateTime)
     task_shift_id = Column(Integer, ForeignKey("task_shifts.id"))
-
     task_shift = relationship("TaskShift", back_populates="products")
-
-
