@@ -6,8 +6,18 @@ on:
       - main
 
 jobs:
-  lint-and-test:
+  setup-database-and-test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: control_task_database
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,6 +44,7 @@ jobs:
           pytest app/tests || exit 1
 
   build-and-deploy:
+    needs: setup-database-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
