@@ -226,7 +226,7 @@ class Product(BaseModel):
     batch_number: int
     batch_date: date
     is_aggregated: bool = False
-    aggregated_at: datetime = None
+    aggregated_at: datetime 
     
 class ProductCreate(BaseModel):
     pass
