@@ -18,20 +18,16 @@ jobs:
           python-version: 3.9
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt || exit 1
+        run: pip install -r requirements.txt
 
       - name: Run mypy
-        run: |
-          mypy . || exit 1
+        run: mypy .
 
       - name: Run flake8
-        run: |
-          flake8 . || exit 1
+        run: flake8 .
 
       - name: Run tests
-        run: |
-          pytest app/tests || exit 1
+        run: pytest app/tests
 
   build-and-deploy:
     runs-on: ubuntu-latest
