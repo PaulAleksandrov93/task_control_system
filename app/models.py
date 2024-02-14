@@ -1,4 +1,4 @@
-# models.py
+#models.py
 
 from sqlalchemy import (
     Column,
@@ -47,3 +47,5 @@ class Product(Base):
     task_shift_id = Column(Integer, ForeignKey("task_shifts.id"))
 
     task_shift = relationship("TaskShift", back_populates="products")
+
+
