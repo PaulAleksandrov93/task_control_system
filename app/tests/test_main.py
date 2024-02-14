@@ -52,7 +52,10 @@ def test_get_task_shift_by_id_endpoint(client):
 #         "ДатаВремяНачалаСмены": "2024-01-02T00:00:00",
 #         "ДатаВремяОкончанияСмены": "2024-01-02T08:00:00"
 #     }
-#     response = client.put(f"/task-shifts/{task_shift_id}", json=updated_task_shift_data)
+#     response = client.put(
+#        f"/task-shifts/{task_shift_id}",
+#        json=updated_task_shift_data
+#     )
 #     assert response.status_code == 200
 #     assert response.json()["id"] == task_shift_id
 #     assert response.json()["СтатусЗакрытия"] == True
@@ -71,13 +74,19 @@ def test_get_task_shift_by_id_endpoint(client):
 #         "Название": "Product",
 #         "Количество": 10
 #     }
-#     response = client.post(f"/task-shifts/{task_shift_id}/products/", json=product_data)
+#     response = client.post(
+#       f"/task-shifts/{task_shift_id}/products/",
+#       json=product_data
+#     )
 #     assert response.status_code == 200
 #     assert "id" in response.json()
 
 # def test_aggregate_product_endpoint(client):
 #     task_shift_id = 1
 #     unique_code = "1234567890"
-#     response = client.put(f"/task-shifts/{task_shift_id}/aggregate/?unique_code={unique_code}")
+#     response = client.put(
+#         f"/task-shifts/{task_shift_id}/aggregate/",
+#         params={"unique_code": unique_code}
+#     )
 #     assert response.status_code == 200
 #     assert response.json()["unique_code"] == unique_code

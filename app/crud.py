@@ -26,7 +26,8 @@ def create_shift_tasks(db: Session, shift_tasks_data: List[Dict[str, Any]]):
 
 
 def create_task_shift(db: Session, task_shift: schemas.TaskShiftCreate):
-    # Проверяем наличие записи с такой же комбинацией номера партии и даты партии
+    # Проверяем наличие записи с такой же комбинацией
+    # номера партии и даты партии
     existing_task_shift = (
         db.query(models.TaskShift)
         .filter_by(
