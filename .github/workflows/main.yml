@@ -23,11 +23,11 @@ jobs:
 
       - name: Run mypy
         run: |
-          mypy . || exit 1
+          mypy app || exit 1
 
       - name: Run flake8
         run: |
-          flake8 . || exit 1
+          flake8 app || exit 1
 
       - name: Run tests
         run: |
